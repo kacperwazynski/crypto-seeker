@@ -31,7 +31,10 @@ Built with **Flask**, **PostgreSQL**, and the **CryptoCompare API**.
 
 ## Screenshots
 
-> *Add screenshots of the main dashboard, portfolio calculator, and news feed here after running the app.*
+> Main Page <img width="1071" height="1327" alt="Main page" src="https://github.com/user-attachments/assets/316613da-bdcc-43cb-aac3-30f7bf3992fd" />
+> Coin Info <img width="1078" height="752" alt="Coin info" src="https://github.com/user-attachments/assets/84d85b20-bb6c-492e-971e-aa84b60b3f90" />
+> Portfolio Calculator <img width="1072" height="817" alt="Portfolio Calculator" src="https://github.com/user-attachments/assets/179f5e30-cd3e-4a85-aecf-39cd57e4fe6d" />
+> News Aggregator <img width="1065" height="1712" alt="News Agregator" src="https://github.com/user-attachments/assets/5f6c2c86-8df8-4d9c-b86a-e9775b48ecd8" />
 
 ---
 
