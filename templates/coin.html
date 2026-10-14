@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <style>
+          :root {
+            /* Light theme */
+            --c-light-text: #333;
+            --c-light-background: #fff;
+            --c-light-focus: deepskyblue;
+            --c-light-interactive: mediumvioletred;
+
+            /* Dark theme */
+            --c-dark-text: #fff;
+            --c-dark-background: #333;
+            --c-dark-focus: deeppink;
+            --c-dark-interactive: palegreen;
+          }
+
+          .theme-container {
+            /* Make the light theme the default */
+            --c-text: var(--c-light-text);
+            --c-background: var(--c-light-background);
+            --c-focus: var(--c-light-focus);
+            --c-interactive: var(--c-light-interactive);
+
+            padding: 1.5rem;
+            color: var(--c-text);
+            background-color: var(--c-background);
+          }
+
+          .dark-mode-checkbox:checked ~ .theme-container {
+            /* Override the default theme */
+            --c-text: var(--c-dark-text);
+            --c-background: var(--c-dark-background);
+            --c-focus: var(--c-dark-focus);
+            --c-interactive: var(--c-dark-interactive);
+          }
+
+          .dark-mode-label {
+            margin-bottom: 1em;
+          }
+
+          :focus,
+          .dark-mode-checkbox:focus ~ .theme-container .dark-mode-label {
+            outline: 2px solid var(--c-focus);
+          }
+
+
+          /*
+          * Replace original checkbox
+          */
+
+          .dark-mode-label::before {
+            content: "\2610";
+          }
+
+          .dark-mode-checkbox:checked ~ .theme-container .dark-mode-label::before {
+            content: "\2611";
+          }
+
+          /*
+          visibility-hidden utility class
+
+          Source: https://github.com/h5bp/html5-boilerplate
+
+          Hide only visually, but have it available for screen readers:
+          https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+
+          1. For long content, line feeds are not interpreted as spaces
+            and small width causes content to wrap 1 word per line:
+            https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+          */
+          .visually-hidden {
+            position: absolute;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            border: 0;
+            white-space: nowrap; /* 1. */
+          }
+
+
+
+          /*
+          * Grow content to viewport
+          */
+
+          /*
+          1. Allows the body’s children to grow to
+            100% of the viewport’s height.
+          */
+          html,
+          body {
+            height: 100%; /* 1. */
+          }
+
+          /*
+          1. Allows the content area to grow to the viewport height.
+          */
+          body {
+            display: flex; /* 1. */
+            flex-direction: column; /* 1. */
+          }
+
+          /*
+          1. Grows the content area to take up all the remaining height
+            inside the body element.
+          */
+          .grow {
+            flex-grow: 1; /* 1. */
+          }
+
+
+
+          /*
+          * Basic styles
+          */
+          body {
+            margin: 0;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 1.25em;
+            line-height: 1.5;
+          }
+
+          a {
+            color: var(--c-interactive);
+          }
+
+          h1 {
+            margin-top: 0;
+          }
+
+          code {
+            font-family: 'Fira Mono', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+          }
+
+          .wrapper {
+            max-width: 600px;
+          }
+            * {
+              box-sizing: border-box;
+            }
+            .column {
+              float: left;
+              padding: 10px;
+              height: 650px;
+            }
+            .left {
+              width: 25%;
+            }
+            .right {
+              width: 75%;
+            }
+            .row:after {
+              content: "";
+              display: table;
+              clear: both;
+            }
+            .center {
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              width: 50%;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, inintial-scale=1.0">
+        <title>Crypto seeker - {{symbol}}</title>
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+        <link rel="icon" type="image/x-icon" href="../static/icon.PNG">
+    </head>
+<input id="dark-mode" class="dark-mode-checkbox visually-hidden" type="checkbox">
+<div class="theme-container grow">
+<body>
+    <header class="navbar">
+        <section class="navbar-section" >
+          <a href="/" class="btn btn-link" style="color:black">Main site</a>
+          <a href="/portfolio_calculator" class="btn btn-link" style="color:black">Portfolio calculator</a>
+          <a href="/news_feed" class="btn btn-link" style="color:black">News Feed</a>
+        </section>
+        <section class="navbar-center">
+            <img src="../static/Logo.PNG" width="424px" height="104">
+        </section>
+        <section class="navbar-section">
+          <label class="dark-mode-label" for="dark-mode">
+            Dark mode
+          </label>
+        </section>
+    </header>
+
+    <div class="row">
+        <div class="column left" style="background-color:#808080;">
+          <img src="../static/{{symbol}}.PNG" style="height: 55px;width: 55px" class="center" >
+          <h2 style="text-align: center;">{{symbol}}</h2>
+          <h4 style="text-align: center;">{{coindict.price}}</h4>
+          <br>
+          <h5 >Weiss rating score:</h5>
+          <p style="text-align: center;">Overall rating:</p>
+          <img class="center" src="../static/rating/{{coindict.rating[0]}}.png" style="height: 35px;width: 195px">
+          <p style="text-align: center;">Technology Adoption Rating:</p>
+          <img class="center" src="../static/rating/{{coindict.technologyadoptionrating[0]}}.png" style="height: 35px;width: 195px">
+          <p style="text-align: center;">Market Performance Rating:</p>
+          <img class="center" src="../static/rating/{{coindict.marketperformancerating[0]}}.png" style="height: 35px;width: 195px">
+        </div>
+        <div class="column right" style="background-color:#adadad;">
+          <h5>Price performance:</h5>
+          <p>30 Days: $ {{coindict.one_month_price}}</p>
+          <p>7 Days: $ {{coindict.one_week_price}}</p>
+          <h5>Additional information:</h5>
+          <p>Consensus mechanism: {{coindict.prooftype}}</p>
+          <p>Daily Volume: {{coindict.daily_volume}}</p>
+          <p>Market capitalization: {{coindict.marketcap}}</p>
+          <p>Supply: {{coindict.supply}}</p>
+          <p>Algorithm: {{coindict.algorithm}}</p>
+          <p>Block Number: {{coindict.blocknumber}}</p>
+          <p>Asset Launch Date: {{coindict.assetlaunchdate}}</p>
+          <p>Max Supply: {{coindict.maxsupply}}</p>
+          <p>Block Time: {{coindict.blocktime}}</p>
+          <p>Block Reward: {{coindict.blockreward}}</p>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

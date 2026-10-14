@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, inintial-scale=1.0">
+    <title>Crypto seeker - News</title>
+    <link rel="icon" type="image/x-icon" href="../static/icon.PNG">
+</head>
+<body>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+    <header class="navbar">
+        <section class="navbar-section" >
+          <a href="/" class="btn btn-link" style="color:black">Main site</a>
+          <a href="/portfolio_calculator" class="btn btn-link" style="color:black">Portfolio calculator</a>
+          <a href="/news_feed" class="btn btn-link" style="color:black">News Feed</a>
+        </section>
+        <section class="navbar-center">
+          <img src="../static/Logo.PNG" width="424px" height="104">
+        </section>
+        <section class="navbar-section">
+          <form method="POST" action="/news_feed">
+            <a style="color: black">Calls limit: {{limit_day}}</a>
+            <input type="submit" name="btn" value="download articles" class="btn btn-error" style="color: black;" style="text-align: right;">
+          </form>
+        </section>
+    </header>
+    {% for key,value in articles_data.items() %}
+    <div class="card">
+        <div class="card-image">
+          <img src="{{ value['imageurl'] }}" class="img-responsive">
+        </div>
+        <div class="card-header">
+          <div class="card-title h5">{{ value["title"] }}</div>
+          <div class="card-subtitle text-gray">{{ value["source_name"] }}</div>
+        </div>
+        <div class="card-body">
+            Visit {{ value["body"] }}
+        </div>
+        <div class="card-footer">
+            <a href="{{ value['url'] }}" class="btn btn-primary">Visit {{ value["source_name"] }}</a>
+        </div>
+      </div>
+      {% endfor %}
+</body>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, inintial-scale=1.0">
+        <title>Crypto seeker</title>
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+        <link rel="icon" type="image/x-icon" href="../static/icon.PNG">
+    </head>
+<body class="text-ligh">
+    <header class="navbar">
+        <section class="navbar-section" >
+          <a href="/" class="btn btn-link" style="color:black">Main site</a>
+          <a href="/portfolio_calculator" class="btn btn-link" style="color:black">Portfolio calculator</a>
+          <a href="/news_feed" class="btn btn-link" style="color:black">News Feed</a>
+        </section>
+        <section class="navbar-center">
+            <img src="../static/Logo.PNG" width="424px" height="104">
+        </section>
+        <section class="navbar-section">
+            <form method="POST" action="/">
+                <a style="color: black">Calls limit: {{limit_day}}</a>
+                <input type="submit" name="btn" value="download data" class="btn btn-error" style="color: black;" style="text-align: right;" ondblclick="myalert()">
+                <p style="color: black;text-align: end; margin-bottom: 0" >Next Download avilable at: {{nextdownloadtime}}</p>
+                <p style="color: black;text-align: end; margin-bottom: 0" >Last Download: {{lastdownloadtime}}</p>
+            </form>
+        </section>
+    </header>
+    <div>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th style="text-align: center">#
+                <form method="POST" action="/">
+                    <button type="submit" style="color: black;background-color: lightgray;outline: black;" class="btn btn-action; s-circle" name="btn" value="placeasc"><i class="icon icon-arrow-down"></i></button>
+                    <button type="submit" style="color: black;background-color: lightgray" class="btn btn-action; s-circle" name="btn" value="placedsc"><i class="icon icon-arrow-up"></i></button>
+                </form>
+                </th>
+                <th style="text-align: center">Icon</th>
+                <th style="text-align: center">Name</th>
+                <th style="text-align: center">Symbol</th>
+                <th style="text-align: center">Today
+                <form method="POST" action="/">
+                    <button type="submit" style="color: black;background-color: lightgreen" class="btn btn-action" name="btn" value="today_asc"><i class="icon icon-arrow-down"></i></button>
+                    <button type="submit" style="color: black;background-color: lightcoral" class="btn btn-action" name="btn" value="today_dsc"><i class="icon icon-arrow-up"></i></button>
+                </form>
+                </th>
+                <th style="text-align: center">7 Days
+                    <form method="POST" action="/">
+                        <button type="submit" style="color: black;background-color: lightgreen" class="btn btn-action" name="btn" value="7day_asc"><i class="icon icon-arrow-down"></i></button>
+                        <button type="submit" style="color: black;background-color: lightcoral" class="btn btn-action" name="btn" value="7day_dsc"><i class="icon icon-arrow-up"></i></button>
+                    </form>
+                </th>
+                <th style="text-align: center">30 Days
+                    <form method="POST" action="/">
+                        <button type="submit" style="color: black;background-color: lightgreen" class="btn btn-action" name="btn" value="30day_asc"><i class="icon icon-arrow-down"></i></button>
+                        <button type="submit" style="color: black;background-color: lightcoral" class="btn btn-action" name="btn" value="30day_dsc"><i class="icon icon-arrow-up"></i></button>
+                    </form>
+                </th>
+                <th style="text-align: center">24H Volume</th>
+                <th style="text-align: center">MarketCap</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for nazwa, dane in coindict.items() %}
+                <tr>
+                    <td style="text-align: center">
+                        <form method="POST" action="/coin/{{dane.symbol}}">
+                            <input type="submit" name="click" value="{{dane.id}}">
+                        </form>
+                    </td>
+                    <td style="text-align: center"><img height="45px" width="45px" src="{{ dane.image }}" alt="{{dane.symbol}}"></a></td>
+                    <td style="text-align: center">{{ dane.coinname }}</td>
+                    <td style="text-align: center">{{ dane.symbol }}</td>
+                    {% if dane.day_change_percentage >= 0: %}
+                    <td style="text-align: center;color:green">{{ dane.price }} ({{ dane.day_change_percentage }})%</td>
+                        {% else %}
+                    <td style="text-align: center;color:red">{{ dane.price }} ({{ dane.day_change_percentage }})%</td>
+                        {% endif %}
+                    {% if dane.week_direction == "up": %}
+                    <td style="text-align: center;color:green"> {{ dane.one_week_price }} $  (+{{ dane.week_change }})% </td>
+                        {% else %}
+                    <td style="text-align: center;color:red"> {{ dane.one_week_price }} $  (-{{ dane.week_change }})% </td>
+                        {% endif %}
+                    {% if dane.month_direction == "up": %}
+                    <td style="text-align: center;color:green"> {{ dane.one_month_price }} $  (+{{ dane.month_change }})% </td>
+                        {% else %}
+                    <td style="text-align: center;color:red"> {{ dane.one_month_price }} $  (-{{ dane.month_change }})% </td>
+                        {% endif %}
+                    <td style="text-align: center">{{ dane.daily_volume }}</td>
+                    <td style="text-align: center">{{ dane.marketcap }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <script>
+            function myalert() {
+                alert("Loading data...\n " +
+                    "This might take a second or two" );
+            }
+        </script>
+    </div>
+</body>
+</html>
