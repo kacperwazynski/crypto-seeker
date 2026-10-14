@@ -46,7 +46,7 @@ Built with **Flask**, **PostgreSQL**, and the **CryptoCompare API**.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/crypto-seeker.git
+git clone https://github.com/kacperwazynski/crypto-seeker.git
 cd crypto-seeker
 ```
 
@@ -145,4 +145,4 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 
 Kacper Ważyński – kacperwazynski@gmail.com
 
-Project Link: [https://github.com/YOUR_USERNAME/crypto-seeker](https://github.com/YOUR_USERNAME/crypto-seeker)
+Project Link: [https://github.com/kacperwazynski/crypto-seeker](https://github.com/kacperwazynski/crypto-seeker)
